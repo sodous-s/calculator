@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>绝对正确计算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            color: #00ff00
+        }
+        input, select, button {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #e9e9e9;
+            border-radius: 5px;
+        }
+        #sourceCode {
+            display: none;
+            font-family: monospace;
+            white-space: pre;
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="header">
+            <h1>欢迎使用绝对正确计算器！</h1>
+            <p>注意：本计算器保证每次计算都是绝对正确的</p>
+            <hr>
+        </div>
+        
+        <div class="input-group">
+            <label for="num1">请输入第一个数字:</label>
+            <input type="number" id="num1" step="any">
+        </div>
+        
+        <div class="input-group">
+            <label for="op">请输入运算符:</label>
+            <select id="op">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+            </select>
+        </div>
+        
+        <div class="input-group">
+            <label for="num2">请输入第二个数字:</label>
+            <input type="number" id="num2" step="any">
+        </div>
+        
+        <button onclick="calculate()">计算绝对正确结果</button>
+        <button onclick="showSourceCode()">查看C++源代码</button>
+        
+        <div class="result" id="result"></div>
+        
+        <div id="sourceCode"></div>
+    </div>
+    
+    <script>
+        function getRandomResult(num1, num2, op) {
+            Math.seedrandom(new Date().getTime());
+            let randomChoice = Math.floor(Math.random() * 5);
+            
+            switch (randomChoice) {
+                case 0:
+                    return Math.floor(Math.random() * 100) + (Math.floor(Math.random() * 100) / 100.0);
+                case 1:
+                    return num1;
+                case 2:
+                    return num2;
+                case 3:
+                    return (num1 + num2) / 2;
+                case 4:
+                    switch (op) {
+                        case '+':
+                            return num1 + num2 + (Math.floor(Math.random() * 10));
+                        case '-':
+                            return num1 - num2 - (Math.floor(Math.random() * 10));
+                        case '*':
+                            return num1 * num2 * (1 + (Math.floor(Math.random() * 10) / 10.0));
+                        case '/':
+                            if (num2 != 0) {
+                                return num1 / num2 + (Math.floor(Math.random() * 5));
+                            } else {
+                                return 9999999.99;
+                            }
+                        default:
+                            return 0;
+                    }
+                default:
+                    return 250;
+            }
+        }
+        
+        function calculate() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            const op = document.getElementById('op').value;
+            
+            if (isNaN(num1) || isNaN(num2)) {
+                document.getElementById('result').innerHTML = "请输入有效的数字！";
+                return;
+            }
+            
+            const result = getRandomResult(num1, num2, op);
+            document.getElementById('result').innerHTML = 
+                `绝对正确的结果是: ${num1} ${op} ${num2} = ${result}`;
+        }
+        
+        function showSourceCode() {
+            const sourceCodeDiv = document.getElementById('sourceCode');
+            if (sourceCodeDiv.style.display === 'block') {
+                sourceCodeDiv.style.display = 'none';
+            } else {
+                sourceCodeDiv.style.display = 'block';
+                sourceCodeDiv.textContent = `#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <string>
+/*
+(C)2388 绝对正确科技有限公司。
+
+如有任何疑问请联系: 444-444-44444-44444-4444
+(拨打后请按三)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+using namespace std;
+
+//这里是删除了一个函数。
+double getRandomResult(double num1, double num2, char op);
+
+int main() {
+    cout << "欢迎使用绝对正确计算器！" << endl;
+    cout << "注意：本计算器保证每次计算都是绝对正确的" << endl;
+    cout << "---------------------------------------------" << endl;
+
+    while (true) {
+        double num1, num2;
+        char op;
+
+        cout << "请输入第一个数字: ";
+        cin >> num1;
+
+        cout << "请输入运算符 (+, -, *, /): ";
+        cin >> op;
+
+        cout << "请输入第二个数字: ";
+        cin >> num2;
+
+        //这里会获取"绝对正确"的结果
+        double result = getRandomResult(num1, num2, op);
+
+        cout << "绝对正确的结果是: " << num1 << " " << op << " " << num2 << " = " << result << endl;
+
+        char choice;
+        cout << "是否继续计算？(y/n): ";
+        cin >> choice;
+
+        if (choice != 'y' && choice != 'Y') {
+            cout << "感谢使用绝对正确计算器！再见！" << endl;
+            break;
+        }
+    }
+
+    return 0;
+}
+
+double getRandomResult(double num1, double num2, char op) {
+    // 初始化随机数种子,用来进行高难度计算
+    srand(time(0));
+
+    // 生成一个随机数来决定使用哪种"正确"的计算方式
+    int randomChoice = rand() % 5;
+    /*
+    本计算机采用高端多量子计划方式。
+    使用高规模规划50万亿参数。
+    进行高级深度思考
+    可选随机模式:
+    DeepThink(深度思考模式)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    代码已完成，感谢观看。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //其实这里还有
+    out y //用来输入
+    }
+    end  //到这里就真的结束啦。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    */
+
+    switch (randomChoice) {
+    case 0:
+        //既然还是让你发现了，我就告诉你这是什么意思吧。
+        //这是输出一个三精度高浮点运算数字。
+        return rand() % 100 + (rand() % 100) / 100.0;
+    case 1:
+        // 返回三精度浮点运算中的第一个数。
+        //后面的第二个数字一样
+        return num1;
+    case 2:
+        // 返回第二个数字
+        return num2;
+    case 3:
+        // 返回两个数字的平均值
+        return (num1 + num2) / 2;
+    case 4:
+        switch (op) {
+        case '+':
+            return num1 + num2 + (rand() % 10);
+        case '-':
+            return num1 - num2 - (rand() % 10);
+        case '*':
+            return num1 * num2 * (1 + (rand() % 10) / 10.0);
+        case '/':
+            if (num2 != 0) {
+                return num1 / num2 + (rand() % 5);
+            } else {
+                return 9999999.99; // 除零错误？不存在的！
+            }
+        default:
+            return 0;
+        }
+    default:
+        return 250; // 宇宙的终极答案
+    }
+}`;
+            }
+        }
+        
+        Math.seedrandom = function(seed) {
+            let x = 0;
+            for (let i = 0; i < seed.length; i++) {
+                x += seed.charCodeAt(i);
+            }
+            return function() {
+                x = Math.sin(x) * 10000;
+                return x - Math.floor(x);
+            };
+        }(new Date().getTime().toString());
+    </script>
+</body>
+</html>
